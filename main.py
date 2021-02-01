@@ -25,7 +25,7 @@ mpl.rcParams['font.family'] = 'Euclid Circular A'
 
 # plotting the graph
 bcr.bar_chart_race(
-    df=df,
+    df=df.head(10),
     filename='visualization/video.mp4',
     orientation='h',
     sort='desc',
