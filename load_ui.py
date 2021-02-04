@@ -2,6 +2,7 @@ from tkinter import *
 import os
 from tkinter import filedialog
 import pickle
+import main
 
 class BCR_UI:
     def __init__(self):
@@ -11,7 +12,8 @@ class BCR_UI:
         self.window.configure(bg="#CDDDFD")
     
     def createVideo(self):
-        os.system('python3 main.py')
+        # os.system('python3 main.py')
+        main.BCR_Main(self.path)
 
     def runButton(self):
         btn = Button(self.window, text="Run", command=self.createVideo)
@@ -24,9 +26,12 @@ class BCR_UI:
             label.grid(row=1, column=0)
             # return file
 
-            # store the path
-            pkfile = open('dir', 'ab')
-            pickle.dump(file, pkfile)
+            # # store the path
+            # pkfile = open('dir', 'ab')
+            # pickle.dump(file, pkfile)
+
+            self.path = file
+
 
         else:
             label = Label(self.window, text="You have not selected any file.")
