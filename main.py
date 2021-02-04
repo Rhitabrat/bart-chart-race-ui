@@ -1,6 +1,5 @@
 import pandas as pd
 import bar_chart_race as bcr
-import pickle
 
 class BCR_Main:
         
@@ -8,18 +7,11 @@ class BCR_Main:
         
         self.path = file_path
 
-        # # load path from pickle
-        # pkfile = open('dir', 'rb')
-        # path = pickle.load(pkfile)
-
         df = pd.read_csv(self.path, index_col='Date')
 
         # replace empty values with 0
         df.fillna(0.0, inplace=True)
 
-
-        # change
-        import os
         import matplotlib as mpl
         from matplotlib import font_manager as fm
 
@@ -29,8 +21,6 @@ class BCR_Main:
         fm.fontManager.ttflist.extend(font_list)
 
         mpl.rcParams['font.family'] = 'Euclid Circular A'
-
-
 
         # plotting the graph
         bcr.bar_chart_race(
