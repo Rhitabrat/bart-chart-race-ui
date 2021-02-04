@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import bar_chart_race as bcr
 import pickle
