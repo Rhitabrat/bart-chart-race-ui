@@ -15,7 +15,7 @@ class BCR_UI:
 
     def runButton(self):
         btn = Button(self.window, text="Run", command=self.createVideo)
-        btn.grid(row=2, column=0)
+        btn.grid(row=2, column=6)
 
     def browseData(self):
         file = filedialog.askopenfilename(filetypes = (("CSV Files","*.csv"),))
@@ -30,11 +30,11 @@ class BCR_UI:
 
         else:
             label = Label(self.window, text="You have not selected any file.")
-            label.grid(row=1, column=0)
+            label.grid(row=1, column=6)
 
     def uploadAction(self):
         btn = Button(self.window, text="Browse", command=self.browseData,)
-        btn.grid(row=0, column=0)
+        btn.grid(row=0, column=6)
 
     def execution(self):
         self.uploadAction()
