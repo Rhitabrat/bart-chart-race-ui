@@ -3,9 +3,11 @@ import bar_chart_race as bcr
 
 class BCR_Main:
         
-    def __init__(self, file_path):
+    def __init__(self, file_path, image_path, save_location):
         
         self.path = file_path
+        self.i_path = image_path
+        self.location = save_location
 
         df = pd.read_csv(self.path, index_col='Date')
 
@@ -24,8 +26,8 @@ class BCR_Main:
 
         # plotting the graph
         bcr.bar_chart_race(
-            df=df.head(10),
-            filename='visualization/video.mp4',
+            df=df.head(5),
+            filename=self.location + "/video.mp4",
             orientation='h',
             sort='desc',
             n_bars=10,
@@ -74,5 +76,5 @@ class BCR_Main:
                     'pad': 40},
             bar_label_font={'size':27},  # bar text size
             tick_label_font={'size':27}, # y-axis text size
-            img_label_folder='bar_image_labels',
+            img_label_folder=self.i_path,
         )

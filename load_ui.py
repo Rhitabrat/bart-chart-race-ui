@@ -11,11 +11,11 @@ class BCR_UI:
         self.window.configure(bg="#CDDDFD")
     
     def createVideo(self):
-        main.BCR_Main(self.path)
+        main.BCR_Main(self.path, self.i_path, self.location)
 
-    def runButton(self):
-        btn = Button(self.window, text="Run", command=self.createVideo)
-        btn.grid(row=2, column=6)
+    def uploadData(self):
+        btn = Button(self.window, text="Browse Data", command=self.browseData,)
+        btn.grid(row=0, column=6)
 
     def browseData(self):
         file = filedialog.askopenfilename(filetypes = (("CSV Files","*.csv"),))
@@ -25,17 +25,50 @@ class BCR_UI:
 
             self.path = file
 
-
         else:
             label = Label(self.window, text="You have not selected any file.")
             label.grid(row=1, column=6)
 
-    def uploadAction(self):
-        btn = Button(self.window, text="Browse", command=self.browseData,)
-        btn.grid(row=0, column=6)
+    def browseImages(self):
+        directory = filedialog.askdirectory()
+        if(directory):
+            label = Label(self.window, text=ntpath.basename(directory))
+            label.grid(row=2, column=0)
+
+            self.i_path = directory
+
+        else:
+            label = Label(self.window, text="You have not selected any folder.")
+            label.grid(row=2, column=6)
+
+    def uploadImages(self):
+        btn = Button(self.window, text="Browse Image Folder", command=self.browseImages,)
+        btn.grid(row=3, column=6)
+
+    def browseLocation(self):
+        directory = filedialog.askdirectory()
+        if(directory):
+            label = Label(self.window, text=ntpath.basename(directory))
+            label.grid(row=4, column=0)
+
+            self.location = directory
+
+        else:
+            label = Label(self.window, text="You have not selected any location.")
+            label.grid(row=4, column=6)
+
+    def saveLocation(self):
+        btn = Button(self.window, text="Browse Location", command=self.browseLocation,)
+        btn.grid(row=5, column=6)
+
+    def runButton(self):
+        btn = Button(self.window, text="Run", command=self.createVideo)
+        btn.grid(row=6, column=6)
 
     def execution(self):
-        self.uploadAction()
+        self.uploadData()
+        self.uploadImages()
+        self.saveLocation()
         self.runButton()
         self.window.mainloop()
 
