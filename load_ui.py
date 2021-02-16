@@ -1,13 +1,25 @@
+from tkinter import *
 import tkinter as tk
 import time
 from tkinter import filedialog
 import main
 import ntpath
+# from PIL import ImageTk, Image
 
 class Splash(tk.Toplevel):
     def __init__(self, parent):
         tk.Toplevel.__init__(self, parent)
         self.title("Splash")
+        self.configure(bg="#CDDDFD")
+
+        # img = ImageTk.PhotoImage(file = "logo.png")
+        # panel = tk.Label(self, image = img)
+        # # panel.place(side = "bottom", fill = "both", expand = "yes")
+        # panel.pack()
+        
+        self.geometry("400x400")
+        label = tk.Label(self, text="Programiz", bg="#CDDDFD")
+        label.place(relx=0.5, rely=0.5, anchor=CENTER)
 
         ## required to make window show before the program gets to the mainloop
         self.update()
