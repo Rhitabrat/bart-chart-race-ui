@@ -21,6 +21,8 @@ class Splash(tk.Toplevel):
         label = tk.Label(self, text="Programiz", bg="#CDDDFD")
         label.place(relx=0.5, rely=0.5, anchor=CENTER)
 
+        self.overrideredirect(True)
+
         ## required to make window show before the program gets to the mainloop
         self.update()
 
