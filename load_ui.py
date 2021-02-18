@@ -47,8 +47,15 @@ class BCR_UI(tk.Tk):
         self.bg_color = "#CDDDFD"
         self.configure(bg=self.bg_color)
 
+        '''
+        change parameters
+        '''
+        # get title
+        self.title_entry = tk.Entry(self, textvariable=StringVar())
+        self.title_entry.place(relx=0.6, rely=0.4)
+
     def createVideo(self):
-        main.BCR_Main(self.path, self.i_path, self.location)
+        main.BCR_Main(self.path, self.i_path, self.location, self.title_entry.get())
 
     # browser button: upload data
     def uploadData(self):
@@ -119,20 +126,15 @@ class BCR_UI(tk.Tk):
             # label.place(x=150, y=300)
             label.place(relx=0.6, rely=0.3)
 
-    '''
-    Change Parameters
-    '''
 
-    # set title
-    def setTitle(self):
-        text = tk.Entry(self)
-        text.place(relx=0.4, rely=0.4)
-        self.title_name = text.get()
-        print(text)
-
-        label = tk.Label(self, text="Title", bg=self.bg_color)
+    '''
+    Parameter labels
+    '''
+    # title
+    def titleEntry(self):
+        label = tk.Label(self, text="Enter title", bg=self.bg_color)
         label.place(relx=0.2, rely=0.4)
-    
+
     # button: run button
     def runButton(self):
         btn = tk.Button(self, text="Create Video", command=self.createVideo)
@@ -144,7 +146,7 @@ class BCR_UI(tk.Tk):
         self.uploadData()
         self.uploadImages()
         self.saveLocation()
-        self.setTitle()
+        self.titleEntry()
         self.runButton()
         self.mainloop()
 
