@@ -17,7 +17,7 @@ class Splash(tk.Toplevel):
         # # panel.place(side = "bottom", fill = "both", expand = "yes")
         # panel.pack()
         
-        self.geometry("400x400")
+        self.geometry("300x300")
         label = tk.Label(self, text="Programiz", bg="#CDDDFD")
         label.place(relx=0.5, rely=0.5, anchor=CENTER)
 
@@ -33,7 +33,7 @@ class BCR_UI(tk.Tk):
         splash = Splash(self)
 
         ## setup stuff goes here
-        self.title("Main Window")
+        self.title("Bar Chart Race")
         ## simulate a delay while loading
         time.sleep(3)
 
@@ -55,77 +55,77 @@ class BCR_UI(tk.Tk):
         btn = tk.Button(self, text="Upload Data (.csv)", command=self.browseData,)
         # btn.grid(row=0, column=6)
         # btn.place(x=150, y=50)
-        btn.place(relx=0.3, rely=0.1)
+        btn.place(relx=0.2, rely=0.1)
 
     # button: 
     def browseData(self):
         file = filedialog.askopenfilename(filetypes = (("CSV Files","*.csv"),))
         if(file):
-            label = tk.Label(self, text=ntpath.basename(file))
+            label = tk.Label(self, text=ntpath.basename(file), bg=self.bg_color)
             # label.grid(row=1, column=0)
             # label.place(x=150, y=100)
-            label.place(relx=0.3, rely=0.2)
+            label.place(relx=0.6, rely=0.1)
 
             self.path = file
 
         else:
-            label = tk.Label(self, text="You have not selected any file.", bg="#CDDDFD")
+            label = tk.Label(self, text="You have not selected any file.", bg=self.bg_color)
             # label.grid(row=1, column=6)
             # label.place(x=150, y=100)
-            label.place(relx=0.3, rely=0.2)
+            label.place(relx=0.6, rely=0.1)
 
     # button: select image folder
     def uploadImages(self):
-        btn = tk.Button(self, text="Browse Image Folder", command=self.browseImages,)
+        btn = tk.Button(self, text="Upload Image Folder", command=self.browseImages,)
         # btn.grid(row=3, column=6)
         # btn.place(x=150, y=150)
-        btn.place(relx=0.3, rely=0.3)
+        btn.place(relx=0.2, rely=0.2)
 
     def browseImages(self):
         directory = filedialog.askdirectory()
         if(directory):
-            label = tk.Label(self, text=ntpath.basename(directory))
+            label = tk.Label(self, text=ntpath.basename(directory), bg=self.bg_color)
             # label.grid(row=2, column=0)
             # label.place(x=150, y=200)
-            label.place(relx=0.3, rely=0.4)
+            label.place(relx=0.6, rely=0.2)
 
             self.i_path = directory
 
         else:
-            label = tk.Label(self, text="You have not selected any folder.")
+            label = tk.Label(self, text="You have not selected any folder.", bg=self.bg_color)
             # label.grid(row=2, column=6)
             # label.place(x=150, y=200)
-            label.place(relx=0.3, rely=0.4)
+            label.place(relx=0.6, rely=0.2)
 
     # button: select location to save the video
     def saveLocation(self):
-        btn = tk.Button(self, text="Browse Save Location", command=self.browseLocation,)
+        btn = tk.Button(self, text="Choose Saving Location", command=self.browseLocation,)
         # btn.grid(row=5, column=6)
         # btn.place(x=150, y=250)
-        btn.place(relx=0.3, rely=0.5)
+        btn.place(relx=0.2, rely=0.3)
 
     def browseLocation(self):
         directory = filedialog.askdirectory()
         if(directory):
-            label = tk.Label(self, text=ntpath.basename(directory))
+            label = tk.Label(self, text=ntpath.basename(directory), bg=self.bg_color)
             # label.grid(row=4, column=0)
             # label.place(x=150, y=300)
-            label.place(relx=0.3, rely=0.6)
+            label.place(relx=0.6, rely=0.3)
 
             self.location = directory
 
         else:
-            label = tk.Label(self, text="You have not selected any location.")
+            label = tk.Label(self, text="You have not selected any location.", bg=self.bg_color)
             # label.grid(row=4, column=6)
             # label.place(x=150, y=300)
-            label.place(relx=0.3, rely=0.6)
+            label.place(relx=0.6, rely=0.3)
 
     # button: run button
     def runButton(self):
-        btn = tk.Button(self, text="Create Video")
+        btn = tk.Button(self, text="Create Video", command=self.createVideo)
         # btn.grid(row=6, column=6)
         # btn.place(x=150, y=350)
-        btn.place(relx=0.3, rely=0.7)
+        btn.place(relx=0.2, rely=0.4)
 
     def execution(self):
         self.uploadData()
