@@ -3,11 +3,12 @@ import bar_chart_race as bcr
 
 class BCR_Main:
         
-    def __init__(self, file_path, image_path, save_location):
+    def __init__(self, file_path, image_path, save_location, title_name):
         
         self.path = file_path
         self.i_path = image_path
         self.location = save_location
+        self.title_name = title_name
 
         df = pd.read_csv(self.path, index_col='Date')
 
@@ -69,7 +70,7 @@ class BCR_Main:
             # change
             fig_kwargs={'figsize':(26.67, 15), 'dpi':144, 'facecolor': '#F8FAFF'} ,
             colors='brand_colors',
-            title={'label': 'Programming Language Popularity 1990 - 2020',
+            title={'label': self.title_name,
                     'size': 52,
                     'weight': 'bold',
                     # 'loc': 'right',

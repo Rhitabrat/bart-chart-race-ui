@@ -57,7 +57,6 @@ class BCR_UI(tk.Tk):
         # btn.place(x=150, y=50)
         btn.place(relx=0.2, rely=0.1)
 
-    # button: 
     def browseData(self):
         file = filedialog.askopenfilename(filetypes = (("CSV Files","*.csv"),))
         if(file):
@@ -120,17 +119,32 @@ class BCR_UI(tk.Tk):
             # label.place(x=150, y=300)
             label.place(relx=0.6, rely=0.3)
 
+    '''
+    Change Parameters
+    '''
+
+    # set title
+    def setTitle(self):
+        text = tk.Entry(self)
+        text.place(relx=0.4, rely=0.4)
+        self.title_name = text.get()
+        print(text)
+
+        label = tk.Label(self, text="Title", bg=self.bg_color)
+        label.place(relx=0.2, rely=0.4)
+    
     # button: run button
     def runButton(self):
         btn = tk.Button(self, text="Create Video", command=self.createVideo)
         # btn.grid(row=6, column=6)
         # btn.place(x=150, y=350)
-        btn.place(relx=0.2, rely=0.4)
+        btn.place(relx=0.2, rely=0.9)
 
     def execution(self):
         self.uploadData()
         self.uploadImages()
         self.saveLocation()
+        self.setTitle()
         self.runButton()
         self.mainloop()
 
