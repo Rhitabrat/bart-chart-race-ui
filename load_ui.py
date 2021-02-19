@@ -48,14 +48,18 @@ class BCR_UI(tk.Tk):
         self.configure(bg=self.bg_color)
 
         '''
-        change parameters
+        Adjustable parameters
         '''
         # get title
         self.title_entry = tk.Entry(self, textvariable=StringVar())
         self.title_entry.place(relx=0.6, rely=0.4)
+        
+        # get bar size
+        self.bar_size = tk.Entry(self, textvariable=StringVar())
+        self.bar_size.place(relx=0.6, rely=0.5)
 
     def createVideo(self):
-        main.BCR_Main(self.path, self.i_path, self.location, self.title_entry.get())
+        main.BCR_Main(self.path, self.i_path, self.location, self.title_entry.get(), float(self.bar_size.get()))
 
     # browser button: upload data
     def uploadData(self):
@@ -135,6 +139,11 @@ class BCR_UI(tk.Tk):
         label = tk.Label(self, text="Enter title", bg=self.bg_color)
         label.place(relx=0.2, rely=0.4)
 
+    # bar_size
+    def barSizeEntry(self):
+        label = tk.Label(self, text="Enter bar size (0 to 1)", bg=self.bg_color)
+        label.place(relx=0.2, rely=0.5)
+
     # button: run button
     def runButton(self):
         btn = tk.Button(self, text="Create Video", command=self.createVideo)
@@ -147,6 +156,7 @@ class BCR_UI(tk.Tk):
         self.uploadImages()
         self.saveLocation()
         self.titleEntry()
+        self.barSizeEntry()
         self.runButton()
         self.mainloop()
 

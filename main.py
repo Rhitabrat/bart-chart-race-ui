@@ -3,12 +3,13 @@ import bar_chart_race as bcr
 
 class BCR_Main:
         
-    def __init__(self, file_path, image_path, save_location, title_name):
+    def __init__(self, file_path, image_path, save_location, title_name, bar_size):
         
         self.path = file_path
         self.i_path = image_path
         self.location = save_location
         self.title_name = title_name
+        self.bar_size = bar_size
 
         df = pd.read_csv(self.path, index_col='Date')
 
@@ -37,7 +38,7 @@ class BCR_Main:
             steps_per_period=45, # smoothness
             interpolate_period=False,
             # label_bars=True,
-            bar_size=.95,
+            bar_size=self.bar_size,
             period_label={'x': .95, 'y': .15,
                         'ha': 'right',
                         'va': 'center',
