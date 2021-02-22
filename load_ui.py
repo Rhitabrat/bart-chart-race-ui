@@ -43,30 +43,35 @@ class BCR_UI(tk.Tk):
         ## show window again
         self.deiconify()
 
-        self.geometry("500x450")
+        self.geometry("600x550")
         self.bg_color = "#CDDDFD"
+        self.btn_color = "#0556F3"
+        self.hint_color = "#464646"
         self.configure(bg=self.bg_color)
 
         '''
         Adjustable parameters
         '''
         # get title
-        self.title_entry = tk.Entry(self, textvariable=StringVar())
-        self.title_entry.place(relx=0.6, rely=0.4)
+        self.title_entry = tk.Entry(self, textvariable=StringVar(self, value='Title Name'))
+        self.title_entry.place(relx=0.6, rely=0.5)
         
         # get bar size
-        self.bar_size = tk.Entry(self, textvariable=StringVar())
-        self.bar_size.place(relx=0.6, rely=0.5)
-
+        self.bar_size = tk.Entry(self, textvariable=StringVar(self, value='0.95'))
+        self.bar_size.place(relx=0.6, rely=0.7)
+    
+    # call main.py
     def createVideo(self):
         main.BCR_Main(self.path, self.i_path, self.location, self.title_entry.get(), float(self.bar_size.get()))
 
     # browser button: upload data
     def uploadData(self):
-        btn = tk.Button(self, text="Upload Data (.csv)", command=self.browseData,)
+        btn = tk.Button(self, text="Upload Data", command=self.browseData,)
         # btn.grid(row=0, column=6)
         # btn.place(x=150, y=50)
         btn.place(relx=0.2, rely=0.1)
+        label = tk.Label(self, text="*The data should be in csv format. eg. data.csv", bg=self.bg_color, fg=self.hint_color)
+        label.place(relx=0.2, rely=0.15)
 
     def browseData(self):
         file = filedialog.askopenfilename(filetypes = (("CSV Files","*.csv"),))
@@ -90,6 +95,8 @@ class BCR_UI(tk.Tk):
         # btn.grid(row=3, column=6)
         # btn.place(x=150, y=150)
         btn.place(relx=0.2, rely=0.2)
+        label = tk.Label(self, text="*The name of each image should match the column name in the data.\neg. If column name is 'Python', the image name must be 'Python.png'", bg=self.bg_color, fg=self.hint_color)
+        label.place(relx=0.2, rely=0.25)
 
     def browseImages(self):
         directory = filedialog.askdirectory()
@@ -109,10 +116,12 @@ class BCR_UI(tk.Tk):
 
     # button: select location to save the video
     def saveLocation(self):
-        btn = tk.Button(self, text="Choose Saving Location", command=self.browseLocation,)
+        btn = tk.Button(self, text="Choose Video Destination", command=self.browseLocation,)
         # btn.grid(row=5, column=6)
         # btn.place(x=150, y=250)
-        btn.place(relx=0.2, rely=0.3)
+        btn.place(relx=0.2, rely=0.35)
+        label = tk.Label(self, text="*Choose a folder to save the video.", bg=self.bg_color, fg=self.hint_color)
+        label.place(relx=0.2, rely=0.4)
 
     def browseLocation(self):
         directory = filedialog.askdirectory()
@@ -136,17 +145,21 @@ class BCR_UI(tk.Tk):
     '''
     # title
     def titleEntry(self):
-        label = tk.Label(self, text="Enter title", bg=self.bg_color)
-        label.place(relx=0.2, rely=0.4)
+        label_1 = tk.Label(self, text="Title", bg=self.bg_color)
+        label_1.place(relx=0.2, rely=0.5)
+        label_2 = tk.Label(self, text="*It is the text that appears at the top of the Video as a heading", bg=self.bg_color, fg=self.hint_color)
+        label_2.place(relx=0.2, rely=0.55)
 
     # bar_size
     def barSizeEntry(self):
-        label = tk.Label(self, text="Enter bar size (0 to 1)", bg=self.bg_color)
-        label.place(relx=0.2, rely=0.5)
+        label_1 = tk.Label(self, text="Thickness of the Bar", bg=self.bg_color)
+        label_1.place(relx=0.2, rely=0.7)
+        label_2 = tk.Label(self, text="*The value should be a decimal between 0 and 1. eg: 0.95", bg=self.bg_color, fg=self.hint_color)
+        label_2.place(relx=0.2, rely=0.75)
 
     # button: run button
     def runButton(self):
-        btn = tk.Button(self, text="Create Video", command=self.createVideo)
+        btn = tk.Button(self, text="Create Video", command=self.createVideo, bg=self.btn_color)
         # btn.grid(row=6, column=6)
         # btn.place(x=150, y=350)
         btn.place(relx=0.2, rely=0.9)
