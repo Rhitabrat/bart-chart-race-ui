@@ -67,7 +67,6 @@ class BCR_UI(tk.Tk):
     # browser button: upload data
     def uploadData(self):
         btn = tk.Button(self, text="Upload Data", command=self.browseData,)
-        # btn.grid(row=0, column=6)
         # btn.place(x=150, y=50)
         btn.place(relx=0.2, rely=0.1)
         label = tk.Label(self, text="*The data should be in csv format. eg. data.csv", bg=self.bg_color, fg=self.hint_color)
@@ -77,7 +76,6 @@ class BCR_UI(tk.Tk):
         file = filedialog.askopenfilename(filetypes = (("CSV Files","*.csv"),))
         if(file):
             label = tk.Label(self, text=ntpath.basename(file), bg=self.bg_color)
-            # label.grid(row=1, column=0)
             # label.place(x=150, y=100)
             label.place(relx=0.6, rely=0.1)
 
@@ -85,14 +83,12 @@ class BCR_UI(tk.Tk):
 
         else:
             label = tk.Label(self, text="You have not selected any file.", bg=self.bg_color)
-            # label.grid(row=1, column=6)
             # label.place(x=150, y=100)
             label.place(relx=0.6, rely=0.1)
 
     # button: select image folder
     def uploadImages(self):
         btn = tk.Button(self, text="Upload Image Folder", command=self.browseImages,)
-        # btn.grid(row=3, column=6)
         # btn.place(x=150, y=150)
         btn.place(relx=0.2, rely=0.2)
         label = tk.Label(self, text="*The name of each image should match the column name in the data.\neg. If column name is 'Python', the image name must be 'Python.png'", bg=self.bg_color, fg=self.hint_color)
@@ -102,7 +98,6 @@ class BCR_UI(tk.Tk):
         directory = filedialog.askdirectory()
         if(directory):
             label = tk.Label(self, text=ntpath.basename(directory), bg=self.bg_color)
-            # label.grid(row=2, column=0)
             # label.place(x=150, y=200)
             label.place(relx=0.6, rely=0.2)
 
@@ -110,14 +105,12 @@ class BCR_UI(tk.Tk):
 
         else:
             label = tk.Label(self, text="You have not selected any folder.", bg=self.bg_color)
-            # label.grid(row=2, column=6)
             # label.place(x=150, y=200)
             label.place(relx=0.6, rely=0.2)
 
     # button: select location to save the video
     def saveLocation(self):
         btn = tk.Button(self, text="Choose Video Destination", command=self.browseLocation,)
-        # btn.grid(row=5, column=6)
         # btn.place(x=150, y=250)
         btn.place(relx=0.2, rely=0.35)
         label = tk.Label(self, text="*Choose a folder to save the video.", bg=self.bg_color, fg=self.hint_color)
@@ -127,7 +120,6 @@ class BCR_UI(tk.Tk):
         directory = filedialog.askdirectory()
         if(directory):
             label = tk.Label(self, text=ntpath.basename(directory), bg=self.bg_color)
-            # label.grid(row=4, column=0)
             # label.place(x=150, y=300)
             label.place(relx=0.6, rely=0.3)
 
@@ -135,7 +127,6 @@ class BCR_UI(tk.Tk):
 
         else:
             label = tk.Label(self, text="You have not selected any location.", bg=self.bg_color)
-            # label.grid(row=4, column=6)
             # label.place(x=150, y=300)
             label.place(relx=0.6, rely=0.3)
 
@@ -160,8 +151,7 @@ class BCR_UI(tk.Tk):
     # button: run button
     def runButton(self):
         btn = tk.Button(self, text="Create Video", command=self.createVideo, bg=self.btn_color)
-        # btn.grid(row=6, column=6)
-        # btn.place(x=150, y=350)
+        # btn = tk.Button(self, text="Create Video", command=self.createVideo, highlightbackground=self.btn_color)   # for mac
         btn.place(relx=0.2, rely=0.9)
 
     def execution(self):
