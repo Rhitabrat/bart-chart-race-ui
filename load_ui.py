@@ -48,6 +48,8 @@ class BCR_UI(tk.Tk):
         self.btn_color = "#0556F3"
         self.hint_color = "#464646"
         self.configure(bg=self.bg_color)
+        self.i_flag = False
+        self.s_flag = False
 
         '''
         Adjustable parameters
@@ -95,6 +97,7 @@ class BCR_UI(tk.Tk):
         label.place(relx=0.2, rely=0.25)
 
     def browseImages(self):
+        i_flag = True
         directory = filedialog.askdirectory()
         if(directory):
             label = tk.Label(self, text=ntpath.basename(directory), bg=self.bg_color)
@@ -104,6 +107,7 @@ class BCR_UI(tk.Tk):
             self.i_path = directory
 
         else:
+            self.i_path = None
             label = tk.Label(self, text="You have not selected any folder.", bg=self.bg_color)
             # label.place(x=150, y=200)
             label.place(relx=0.6, rely=0.2)
@@ -117,18 +121,19 @@ class BCR_UI(tk.Tk):
         label.place(relx=0.2, rely=0.4)
 
     def browseLocation(self):
+        s_flag = True
         directory = filedialog.askdirectory()
         if(directory):
             label = tk.Label(self, text=ntpath.basename(directory), bg=self.bg_color)
             # label.place(x=150, y=300)
-            label.place(relx=0.6, rely=0.3)
+            label.place(relx=0.6, rely=0.35)
 
             self.location = directory
-
         else:
+            self.location = None
             label = tk.Label(self, text="You have not selected any location.", bg=self.bg_color)
             # label.place(x=150, y=300)
-            label.place(relx=0.6, rely=0.3)
+            label.place(relx=0.6, rely=0.35)
 
 
     '''
@@ -155,6 +160,15 @@ class BCR_UI(tk.Tk):
         btn.place(relx=0.2, rely=0.9)
 
     def execution(self):
+
+        # check if browse image button is clicked
+        if self.i_flag == False:
+            self.i_path = None
+
+        # check if browse saving button is clicked
+        if self.s_flag == False:
+            self.location = None
+        
         self.uploadData()
         self.uploadImages()
         self.saveLocation()

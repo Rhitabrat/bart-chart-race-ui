@@ -25,11 +25,17 @@ class BCR_Main:
         fm.fontManager.ttflist.extend(font_list)
 
         mpl.rcParams['font.family'] = 'Euclid Circular A'
+        
+        # handle none value of location
+        if self.location == None:
+            self.location = "video.mp4"
+        else:
+            self.location = self.location + "/video.mp4"
 
         # plotting the graph
         bcr.bar_chart_race(
             df=df.head(5),
-            filename=self.location + "/video.mp4",
+            filename=self.location,
             orientation='h',
             sort='desc',
             n_bars=10,
