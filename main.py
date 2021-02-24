@@ -3,13 +3,14 @@ import bar_chart_race as bcr
 
 class BCR_Main:
         
-    def __init__(self, file_path, image_path, save_location, title_name, bar_size):
+    def __init__(self, file_path, image_path, save_location, title_name, bar_size, color_palette):
         
         self.path = file_path
         self.i_path = image_path
         self.location = save_location
         self.title_name = title_name
         self.bar_size = bar_size
+        self.color_palette = color_palette
 
         df = pd.read_csv(self.path, index_col='Date')
 
@@ -76,7 +77,8 @@ class BCR_Main:
 
             # change
             fig_kwargs={'figsize':(26.67, 15), 'dpi':144, 'facecolor': '#F8FAFF'} ,
-            colors='brand_colors',
+            # colors='brand_colors',
+            colors=self.color_palette,
             title={'label': self.title_name,
                     'size': 52,
                     'weight': 'bold',
