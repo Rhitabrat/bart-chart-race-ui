@@ -56,7 +56,10 @@ class BCR_UI(tk.Tk):
         self.parameter_frame = tk.LabelFrame(self, text="Enter Parameters", bg=self.bg_color, bd=2)  
         self.parameter_frame.pack(fill="both", expand="yes")
 
-        self.run_frame = tk.LabelFrame(self, bg=self.bg_color, bd=2, height=65)  
+        self.advanced_frame = tk.LabelFrame(self, text="Advanced Options", bg=self.bg_color, bd=2, height=65)  
+        self.advanced_frame.pack(fill="both", )
+
+        self.run_frame = tk.LabelFrame(self, text="Create Video", bg=self.bg_color, bd=2, height=65)  
         self.run_frame.pack(fill="both", )
 
         self.configure(bg=self.bg_color)
@@ -169,6 +172,12 @@ class BCR_UI(tk.Tk):
         label_1.place(relx=0.1, rely=0.5)
         label_2 = tk.Label(self.parameter_frame, text="*Enter the hex code of colors separated by a comma. eg: #6ECBCE,#FF2243", bg=self.bg_color, fg=self.hint_color)
         label_2.place(relx=0.1, rely=0.6)
+    
+    # button: run button
+    def advancedButton(self):
+        btn = tk.Button(self.advanced_frame, text="Select Advanced Options", bg=self.btn_color)
+        # btn = tk.Button(self, text="Create Video", command=self.createVideo, highlightbackground=self.btn_color)   # for mac
+        btn.place(relx=0.35, rely=0.2)
 
     # button: run button
     def runButton(self):
@@ -192,6 +201,7 @@ class BCR_UI(tk.Tk):
         self.titleEntry()
         self.barSizeEntry()
         self.colorsEntry()
+        self.advancedButton()
         self.runButton()
         self.mainloop()
 
