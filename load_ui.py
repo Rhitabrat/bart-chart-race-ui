@@ -175,9 +175,12 @@ class BCR_UI(tk.Tk):
     
     # button: run button
     def advancedButton(self):
-        btn = tk.Button(self.advanced_frame, text="Select Advanced Options", bg=self.btn_color)
+        btn = tk.Button(self.advanced_frame, text="Select Advanced Options", command=self.popup, bg=self.btn_color)
         # btn = tk.Button(self, text="Create Video", command=self.createVideo, highlightbackground=self.btn_color)   # for mac
         btn.place(relx=0.35, rely=0.2)
+
+    def popup(self):
+        PopupWindow()
 
     # button: run button
     def runButton(self):
@@ -204,6 +207,33 @@ class BCR_UI(tk.Tk):
         self.advancedButton()
         self.runButton()
         self.mainloop()
+
+'''
+Advanced Options
+'''
+class PopupWindow(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+
+        self.title("Advanced Options")
+        self.geometry("400x400")
+        label = tk.Label(self,text="Select Advanced Options",)
+        label.place(relx=0.3, rely=0.1)
+
+        self.input_frame = tk.LabelFrame(self, text="Get More Details", bd=2)
+        self.input_frame.pack(fill="both", expand="yes")
+
+        self.submit_frame = tk.LabelFrame(self, text="Submit", bd=2)
+        self.submit_frame.pack(fill="both", expand="yes")
+
+        self.okButton()
+
+    def okButton(self):
+        btn = tk.Button(self.submit_frame, text="OK", command=self.closeWindow,)
+        btn.place(relx=0.1, rely=0.4)
+
+    def closeWindow(self):
+        self.destroy()
 
 if __name__ == "__main__":
     app = BCR_UI()
