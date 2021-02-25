@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter as tk
+from tkinter import messagebox
 import time
 from tkinter import filedialog
 import main
@@ -62,6 +63,7 @@ class BCR_UI(tk.Tk):
         self.i_flag = False
         self.s_flag = False
         self.c_flag = False
+        self.d_flag = False
 
         '''
         Adjustable parameters
@@ -80,34 +82,34 @@ class BCR_UI(tk.Tk):
     
     # call main.py
     def createVideo(self):
-        main.BCR_Main(self.path, self.i_path, self.location, self.title_entry.get(), float(self.bar_size.get()), self.color_entry.get().split(","))
+        # check if data is uploaded
+        if self.d_flag == False:
+            messagebox.showwarning("showwarning", "Data is not uploaded")
+        else:
+            main.BCR_Main(self.path, self.i_path, self.location, self.title_entry.get(), float(self.bar_size.get()), self.color_entry.get().split(","))
 
     # browser button: upload data
     def uploadData(self):
         btn = tk.Button(self.details_frame, text="Upload Data", command=self.browseData,)
-        # btn.place(x=150, y=50)
         btn.place(relx=0.1, rely=0.1)
         label = tk.Label(self.details_frame, text="*The data should be in csv format. eg. data.csv", bg=self.bg_color, fg=self.hint_color)
         label.place(relx=0.1, rely=0.21)
 
     def browseData(self):
+        self.d_flag = True
         file = filedialog.askopenfilename(filetypes = (("CSV Files","*.csv"),))
         if(file):
             label = tk.Label(self.details_frame, text=ntpath.basename(file), bg=self.bg_color)
-            # label.place(x=150, y=100)
             label.place(relx=0.6, rely=0.1)
-
             self.path = file
-
         else:
+            self.d_flag = False
             label = tk.Label(self.details_frame, text="You have not selected any file.", bg=self.bg_color)
-            # label.place(x=150, y=100)
             label.place(relx=0.6, rely=0.1)
 
     # button: select image folder
     def uploadImages(self):
         btn = tk.Button(self.details_frame, text="Upload Image Folder", command=self.browseImages,)
-        # btn.place(x=150, y=150)
         btn.place(relx=0.1, rely=0.3)
         label = tk.Label(self.details_frame, text="*The name of each image should match the column name in the data.\neg. If column name is 'Python', the image name must be 'Python.png'", bg=self.bg_color, fg=self.hint_color)
         label.place(relx=0.1, rely=0.41)
@@ -117,21 +119,16 @@ class BCR_UI(tk.Tk):
         directory = filedialog.askdirectory()
         if(directory):
             label = tk.Label(self.details_frame, text=ntpath.basename(directory), bg=self.bg_color)
-            # label.place(x=150, y=200)
             label.place(relx=0.6, rely=0.3)
-
             self.i_path = directory
-
         else:
             self.i_path = None
             label = tk.Label(self.details_frame, text="You have not selected any folder.", bg=self.bg_color)
-            # label.place(x=150, y=200)
             label.place(relx=0.6, rely=0.3)
 
     # button: select location to save the video
     def saveLocation(self):
         btn = tk.Button(self.details_frame, text="Choose Video Destination", command=self.browseLocation,)
-        # btn.place(x=150, y=250)
         btn.place(relx=0.1, rely=0.55)
         label = tk.Label(self.details_frame, text="*Choose a folder to save the video.", bg=self.bg_color, fg=self.hint_color)
         label.place(relx=0.1, rely=0.65)
@@ -141,14 +138,11 @@ class BCR_UI(tk.Tk):
         directory = filedialog.askdirectory()
         if(directory):
             label = tk.Label(self.details_frame, text=ntpath.basename(directory), bg=self.bg_color)
-            # label.place(x=150, y=300)
             label.place(relx=0.6, rely=0.55)
-
             self.location = directory
         else:
             self.location = None
             label = tk.Label(self.details_frame, text="You have not selected any location.", bg=self.bg_color)
-            # label.place(x=150, y=300)
             label.place(relx=0.6, rely=0.55)
 
 
