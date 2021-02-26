@@ -27,6 +27,64 @@ class Splash(tk.Toplevel):
         ## required to make window show before the program gets to the mainloop
         self.update()
 
+
+'''
+Advanced Options
+'''
+class PopupWindow(tk.Tk):
+    def __init__(self, data):
+        tk.Tk.__init__(self)
+        self.data = data
+        self.withdraw()
+
+        self.title("Advanced Options")
+        self.geometry("400x400")
+        label = tk.Label(self,text="Select Advanced Options",)
+        label.place(relx=0.3, rely=0.1)
+        
+
+        self.bg_color = "#CDDDFD"
+        self.btn_color = "#0556F3"
+        self.hint_color = "#464646"
+
+        self.configure(bg=self.bg_color)
+
+        self.input_frame = tk.LabelFrame(self, text="Get More Details", bd=2, bg=self.bg_color)
+        self.input_frame.pack(fill="both", expand="yes")
+
+        self.submit_frame = tk.LabelFrame(self, text="Submit", bd=2, bg=self.bg_color)
+        self.submit_frame.pack(fill="both", expand="yes")
+
+        '''
+        Input Fields
+        '''
+        # get bar size
+        self.bar_size = tk.Entry(self.input_frame, textvariable=StringVar(self, value=self.data.get('bar_thickness')))
+        self.bar_size.place(relx=0.6, rely=0.3)
+
+        '''
+        Functions
+        '''
+        self.okButton()
+        self.barSizeEntry()
+
+    # bar_size
+    def barSizeEntry(self):
+        label_1 = tk.Label(self.input_frame, text="Thickness of the Bar", bg=self.bg_color)
+        label_1.place(relx=0.1, rely=0.3)
+        label_2 = tk.Label(self.input_frame, text="*The value should be a decimal between 0 and 1. eg: 0.95", bg=self.bg_color, fg=self.hint_color)
+        label_2.place(relx=0.1, rely=0.4)
+
+    # ok button
+    def okButton(self):
+        btn = tk.Button(self.submit_frame, text="OK", command=self.closeWindow,)
+        btn.place(relx=0.1, rely=0.4)
+
+    def closeWindow(self):
+        self.withdraw()
+
+
+
 class BCR_UI(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -74,14 +132,12 @@ class BCR_UI(tk.Tk):
         # get title
         self.title_entry = tk.Entry(self.parameter_frame, textvariable=StringVar(self, value='Title Name'))
         self.title_entry.place(relx=0.6, rely=0.1)
-        
-        # get bar size
-        self.bar_size = tk.Entry(self.parameter_frame, textvariable=StringVar(self, value='0.95'))
-        self.bar_size.place(relx=0.6, rely=0.3)
 
         # get colors
         self.color_entry = tk.Entry(self.parameter_frame, textvariable=StringVar(self, value="#6ECBCE,#FF2243,#FFC33D,#CE9673"))
         self.color_entry.place(relx=0.6, rely=0.5)
+
+        # self.PopupWindow = PopupWindow()
     
     # call main.py
     def createVideo(self):
@@ -89,7 +145,16 @@ class BCR_UI(tk.Tk):
         if self.d_flag == False:
             messagebox.showwarning("showwarning", "Data is not uploaded")
         else:
-            main.BCR_Main(self.path, self.i_path, self.location, self.title_entry.get(), float(self.bar_size.get()), self.color_entry.get().split(","))
+            main.BCR_Main(self.path, self.i_path, self.location, self.title_entry.get(), self.advanced_data.get('bar_thickness'), self.color_entry.get().split(","))
+
+    @property
+    def advanced_data(self):
+        options = {}
+        try:
+            options['bar_thickness'] = float(self.PopupWindow.bar_size.get())
+        except Exception as e:
+            options['bar_thickness'] = 0.95
+        return options
 
     # browser button: upload data
     def uploadData(self):
@@ -159,14 +224,7 @@ class BCR_UI(tk.Tk):
         label_2 = tk.Label(self.parameter_frame, text="*It is the text that appears at the top of the Video as a heading", bg=self.bg_color, fg=self.hint_color)
         label_2.place(relx=0.1, rely=0.2)
 
-    # bar_size
-    def barSizeEntry(self):
-        label_1 = tk.Label(self.parameter_frame, text="Thickness of the Bar", bg=self.bg_color)
-        label_1.place(relx=0.1, rely=0.3)
-        label_2 = tk.Label(self.parameter_frame, text="*The value should be a decimal between 0 and 1. eg: 0.95", bg=self.bg_color, fg=self.hint_color)
-        label_2.place(relx=0.1, rely=0.4)
-
-    # bar_size
+    # color entry
     def colorsEntry(self):
         label_1 = tk.Label(self.parameter_frame, text="Color palette", bg=self.bg_color)
         label_1.place(relx=0.1, rely=0.5)
@@ -180,7 +238,8 @@ class BCR_UI(tk.Tk):
         btn.place(relx=0.35, rely=0.2)
 
     def popup(self):
-        PopupWindow()
+        self.PopupWindow = PopupWindow(self.advanced_data)
+        self.PopupWindow.deiconify()
 
     # button: run button
     def runButton(self):
@@ -202,38 +261,10 @@ class BCR_UI(tk.Tk):
         self.uploadImages()
         self.saveLocation()
         self.titleEntry()
-        self.barSizeEntry()
         self.colorsEntry()
         self.advancedButton()
         self.runButton()
         self.mainloop()
-
-'''
-Advanced Options
-'''
-class PopupWindow(tk.Tk):
-    def __init__(self):
-        tk.Tk.__init__(self)
-
-        self.title("Advanced Options")
-        self.geometry("400x400")
-        label = tk.Label(self,text="Select Advanced Options",)
-        label.place(relx=0.3, rely=0.1)
-
-        self.input_frame = tk.LabelFrame(self, text="Get More Details", bd=2)
-        self.input_frame.pack(fill="both", expand="yes")
-
-        self.submit_frame = tk.LabelFrame(self, text="Submit", bd=2)
-        self.submit_frame.pack(fill="both", expand="yes")
-
-        self.okButton()
-
-    def okButton(self):
-        btn = tk.Button(self.submit_frame, text="OK", command=self.closeWindow,)
-        btn.place(relx=0.1, rely=0.4)
-
-    def closeWindow(self):
-        self.destroy()
 
 if __name__ == "__main__":
     app = BCR_UI()
