@@ -3,7 +3,8 @@ import bar_chart_race as bcr
 
 class BCR_Main:
         
-    def __init__(self, file_path, image_path, save_location, title_name, bar_size, color_palette):
+    def __init__(self, file_path, image_path, save_location, title_name, 
+                bar_size, color_palette, text_after_bar_label):
         
         self.path = file_path
         self.i_path = image_path
@@ -11,6 +12,8 @@ class BCR_Main:
         self.title_name = title_name
         self.bar_size = bar_size
         self.color_palette = color_palette
+        self.text_after_bar_label = text_after_bar_label
+        # self.text_type_after_bar = text_type_after_bar
 
         df = pd.read_csv(self.path, index_col='Date')
 
@@ -87,4 +90,6 @@ class BCR_Main:
             bar_label_font={'size':27},  # bar text size
             tick_label_font={'size':27}, # y-axis text size
             img_label_folder=self.i_path,
+
+            bar_texttemplate='{x:,.2f}'+str(self.text_after_bar_label),
         )
