@@ -4,7 +4,7 @@ import bar_chart_race as bcr
 class BCR_Main:
         
     def __init__(self, file_path, image_path, save_location, title_name, 
-                bar_size, color_palette, text_after_bar_label):
+                bar_size, color_palette, text_after_bar_label, bar_label_text_type):
         
         self.path = file_path
         self.i_path = image_path
@@ -13,7 +13,7 @@ class BCR_Main:
         self.bar_size = bar_size
         self.color_palette = color_palette
         self.text_after_bar_label = text_after_bar_label
-        # self.text_type_after_bar = text_type_after_bar
+        self.bar_label_text_type = bar_label_text_type
 
         df = pd.read_csv(self.path, index_col='Date')
 
@@ -35,6 +35,12 @@ class BCR_Main:
             self.location = "video.mp4"
         else:
             self.location = self.location + "/video.mp4"
+
+        # handle the type of bar label text
+        if self.bar_label_text_type == 'Decimal':
+            bar_label_text = '{x:,.2f}'
+        else:
+            bar_label_text = '{x:,.0f}'
 
         # plotting the graph
         bcr.bar_chart_race(
@@ -91,5 +97,5 @@ class BCR_Main:
             tick_label_font={'size':27}, # y-axis text size
             img_label_folder=self.i_path,
 
-            bar_texttemplate='{x:,.2f}'+str(self.text_after_bar_label),
+            bar_texttemplate=bar_label_text+str(self.text_after_bar_label),
         )

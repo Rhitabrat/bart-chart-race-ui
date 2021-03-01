@@ -62,15 +62,23 @@ class PopupWindow(tk.Tk):
         self.bar_size = tk.Entry(self.input_frame, textvariable=StringVar(self, value=self.data.get('bar_thickness')))
         self.bar_size.place(relx=0.6, rely=0.05)
 
+        # get text_type_bar_label
+        optionList = ["Decimal","Integer"]
+        self.dropVar=StringVar()
+        self.dropVar.set(optionList[0])
+        self.text_type_bar_label = tk.OptionMenu(self.input_frame, self.dropVar, *optionList,)
+        self.text_type_bar_label.place(relx=0.6, rely=0.3)
+
         # get text_after_bar_label
         self.text_after_bar_label = tk.Entry(self.input_frame, textvariable=StringVar(self, value=self.data.get('text_after_bar_label')))
-        self.text_after_bar_label.place(relx=0.6, rely=0.3)
+        self.text_after_bar_label.place(relx=0.6, rely=0.5)
 
         '''
         Functions
         '''
         self.okButton()
         self.barSizeEntry()
+        self.barLabelTextType()
         self.textAfterBarLabelEntry()
 
     # bar_size
@@ -80,13 +88,20 @@ class PopupWindow(tk.Tk):
         label_2 = tk.Label(self.input_frame, text="*The value should be a decimal between 0 and 1. eg: 0.95", bg=self.bg_color, fg=self.hint_color)
         label_2.place(relx=0.05, rely=0.15)
 
-    # bar_size
+    # bar_label_text_type
+    def barLabelTextType(self):
+        label_1 = tk.Label(self.input_frame, text="Bar label type", bg=self.bg_color)
+        label_1.place(relx=0.05, rely=0.3)
+        label_2 = tk.Label(self.input_frame, text="*The type of text for the bar label", bg=self.bg_color, fg=self.hint_color)
+        label_2.place(relx=0.05, rely=0.4)
+
+    # text_after_bar_label
     def textAfterBarLabelEntry(self):
         label_1 = tk.Label(self.input_frame, text="Text after the bar label", bg=self.bg_color)
-        label_1.place(relx=0.05, rely=0.3)
+        label_1.place(relx=0.05, rely=0.5)
         label_2 = tk.Label(self.input_frame, text="*Any symbol or text after the bar value. eg: %", bg=self.bg_color, fg=self.hint_color)
-        label_2.place(relx=0.05, rely=0.4)
-        
+        label_2.place(relx=0.05, rely=0.6)
+
     # ok button
     def okButton(self):
         btn = tk.Button(self.submit_frame, text="OK", command=self.closeWindow,)
@@ -159,6 +174,7 @@ class BCR_UI(tk.Tk):
         else:
             main.BCR_Main(file_path=self.path, image_path=self.i_path, save_location=self.location, title_name=self.title_entry.get(), 
             bar_size=self.advanced_data.get('bar_thickness'), color_palette=self.color_entry.get().split(","),
+            bar_label_text_type=self.advanced_data.get('bar_label_text_type'),
             text_after_bar_label=self.advanced_data.get('text_after_bar_label'),)
 
     @property
@@ -167,6 +183,7 @@ class BCR_UI(tk.Tk):
         try:
             options['bar_thickness'] = float(self.PopupWindow.bar_size.get())
             options['text_after_bar_label'] = self.PopupWindow.text_after_bar_label.get()
+            options['bar_label_text_type'] = self.PopupWindow.dropVar.get()
         except Exception as e:
             options['bar_thickness'] = 0.95
             options['text_after_bar_label'] = ''
