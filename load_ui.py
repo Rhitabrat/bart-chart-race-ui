@@ -38,7 +38,7 @@ class PopupWindow(tk.Tk):
         self.withdraw()
 
         self.title("Advanced Options")
-        self.geometry("500x500")
+        self.geometry("550x550")
         label = tk.Label(self,text="Select Advanced Options",)
         label.place(relx=0.3, rely=0.1)
         
@@ -49,7 +49,7 @@ class PopupWindow(tk.Tk):
 
         self.configure(bg=self.bg_color)
 
-        self.input_frame = tk.LabelFrame(self, text="Get More Details", bd=2, bg=self.bg_color)
+        self.input_frame = tk.LabelFrame(self, text="Get More Details", bd=2, bg=self.bg_color, height=80)
         self.input_frame.pack(fill="both", expand="yes")
 
         self.submit_frame = tk.LabelFrame(self, text="Submit", bd=2, bg=self.bg_color)
@@ -60,11 +60,11 @@ class PopupWindow(tk.Tk):
         '''
         # get bar size
         self.bar_size = tk.Entry(self.input_frame, textvariable=StringVar(self, value=self.data.get('bar_thickness')))
-        self.bar_size.place(relx=0.6, rely=0.3)
+        self.bar_size.place(relx=0.6, rely=0.05)
 
         # get text_after_bar_label
         self.text_after_bar_label = tk.Entry(self.input_frame, textvariable=StringVar(self, value=self.data.get('text_after_bar_label')))
-        self.text_after_bar_label.place(relx=0.6, rely=0.5)
+        self.text_after_bar_label.place(relx=0.6, rely=0.3)
 
         '''
         Functions
@@ -76,16 +76,16 @@ class PopupWindow(tk.Tk):
     # bar_size
     def barSizeEntry(self):
         label_1 = tk.Label(self.input_frame, text="Thickness of the Bar", bg=self.bg_color)
-        label_1.place(relx=0.05, rely=0.3)
+        label_1.place(relx=0.05, rely=0.05)
         label_2 = tk.Label(self.input_frame, text="*The value should be a decimal between 0 and 1. eg: 0.95", bg=self.bg_color, fg=self.hint_color)
-        label_2.place(relx=0.05, rely=0.45)
+        label_2.place(relx=0.05, rely=0.15)
 
     # bar_size
     def textAfterBarLabelEntry(self):
         label_1 = tk.Label(self.input_frame, text="Text after the bar label", bg=self.bg_color)
-        label_1.place(relx=0.05, rely=0.5)
+        label_1.place(relx=0.05, rely=0.3)
         label_2 = tk.Label(self.input_frame, text="*Any symbol or text after the bar value. eg: %", bg=self.bg_color, fg=self.hint_color)
-        label_2.place(relx=0.05, rely=0.55)
+        label_2.place(relx=0.05, rely=0.4)
         
     # ok button
     def okButton(self):
@@ -166,7 +166,7 @@ class BCR_UI(tk.Tk):
         options = {}
         try:
             options['bar_thickness'] = float(self.PopupWindow.bar_size.get())
-            options['text_after_bar_label'] = float(self.PopupWindow.text_after_bar_label.get())
+            options['text_after_bar_label'] = self.PopupWindow.text_after_bar_label.get()
         except Exception as e:
             options['bar_thickness'] = 0.95
             options['text_after_bar_label'] = ''
