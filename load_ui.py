@@ -52,9 +52,6 @@ class PopupWindow(tk.Tk):
         self.input_frame = tk.LabelFrame(self, text="Get More Details", bd=2, bg=self.bg_color, height=80)
         self.input_frame.pack(fill="both", expand="yes")
 
-        self.submit_frame = tk.LabelFrame(self, text="Submit", bd=2, bg=self.bg_color)
-        self.submit_frame.pack(fill="both", expand="yes")
-
         '''
         Input Fields
         '''
@@ -104,8 +101,8 @@ class PopupWindow(tk.Tk):
 
     # ok button
     def okButton(self):
-        btn = tk.Button(self.submit_frame, text="OK", command=self.closeWindow,)
-        btn.place(relx=0.1, rely=0.4)
+        btn = tk.Button(self.input_frame, text="Apply Changes", command=self.closeWindow,)
+        btn.place(relx=0.45, rely=0.8)
 
     def closeWindow(self):
         self.withdraw()
