@@ -96,7 +96,7 @@ class PopupWindow(tk.Tk):
     def textAfterBarLabelEntry(self):
         label_1 = tk.Label(self.input_frame, text="Text after the bar label", bg=self.bg_color)
         label_1.place(relx=0.05, rely=0.5)
-        label_2 = tk.Label(self.input_frame, text="*Any symbol or text after the bar value. eg: %", bg=self.bg_color, fg=self.hint_color)
+        label_2 = tk.Label(self.input_frame, text="*Any symbol or text after the bar value. In other words, it is the unit of the data. eg: %", bg=self.bg_color, fg=self.hint_color)
         label_2.place(relx=0.05, rely=0.6)
 
     # ok button
@@ -250,7 +250,7 @@ class BCR_UI(tk.Tk):
     def titleEntry(self):
         label_1 = tk.Label(self.parameter_frame, text="Title", bg=self.bg_color)
         label_1.place(relx=0.1, rely=0.1)
-        label_2 = tk.Label(self.parameter_frame, text="*It is the text that appears at the top of the Video as a heading", bg=self.bg_color, fg=self.hint_color)
+        label_2 = tk.Label(self.parameter_frame, text="*It is the text that appears at the top of the Video as a heading\nIf it is left empty, the data file name is used.", bg=self.bg_color, fg=self.hint_color)
         label_2.place(relx=0.1, rely=0.2)
 
     # color entry
