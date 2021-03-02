@@ -160,8 +160,7 @@ class BCR_UI(tk.Tk):
         # get colors
         self.color_entry = tk.Entry(self.parameter_frame, textvariable=StringVar(self, value="#6ECBCE,#FF2243,#FFC33D,#CE9673"))
         self.color_entry.place(relx=0.6, rely=0.5)
-
-        # self.PopupWindow = PopupWindow()
+        
     
     # call main.py
     def createVideo(self):

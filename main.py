@@ -42,6 +42,13 @@ class BCR_Main:
         else:
             bar_label_text = '{x:,.0f}'
 
+        # if image folder is not choen, reposition the bar label text (push towards the bar)
+        if self.i_path == None:
+            self.bar_label_position = 0.008
+        else:
+            self.bar_label_position = 0.05
+
+
         # plotting the graph
         bcr.bar_chart_race(
             df=df.head(5),
@@ -98,4 +105,5 @@ class BCR_Main:
             img_label_folder=self.i_path,
 
             bar_texttemplate=bar_label_text+str(self.text_after_bar_label),
+            bar_label_position = self.bar_label_position,
         )
