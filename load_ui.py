@@ -154,13 +154,13 @@ class BCR_UI(tk.Tk):
         Adjustable parameters
         '''
         # get title
-        self.title_entry = tk.Entry(self.parameter_frame, textvariable=StringVar(self, value='Title Name'))
+        self.title_entry = tk.Entry(self.parameter_frame, textvariable=StringVar(self, value=''))
         self.title_entry.place(relx=0.6, rely=0.1)
 
         # get colors
         self.color_entry = tk.Entry(self.parameter_frame, textvariable=StringVar(self, value="#6ECBCE,#FF2243,#FFC33D,#CE9673"))
         self.color_entry.place(relx=0.6, rely=0.5)
-        
+
     
     # call main.py
     def createVideo(self):

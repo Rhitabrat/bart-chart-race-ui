@@ -1,5 +1,6 @@
 import pandas as pd
 import bar_chart_race as bcr
+import ntpath
 
 class BCR_Main:
         
@@ -29,16 +30,25 @@ class BCR_Main:
         fm.fontManager.ttflist.extend(font_list)
 
         mpl.rcParams['font.family'] = 'Euclid Circular A'
+
+        # get file name
+        file_name = ntpath.basename(self.path).split('.')[0]
+
+        # handle video name
+        if self.title_name == '':
+            self.title_name = file_name
         
         # handle none value of location
         if self.location == None:
-            self.location = "video.mp4"
+            self.location = str(file_name) + ".mp4"
         else:
-            self.location = self.location + "/video.mp4"
+            self.location = self.location + "/" + str(file_name) + ".mp4"
 
         # handle the type of bar label text
         if self.bar_label_text_type == 'Decimal':
             bar_label_text = '{x:,.2f}'
+        elif self.bar_label_text_type == 'Integer':
+            bar_label_text = '{x:,.0f}'
         else:
             bar_label_text = '{x:,.0f}'
 
