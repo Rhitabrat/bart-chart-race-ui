@@ -159,7 +159,14 @@ class BCR_UI(tk.Tk):
 
         # get colors
         self.color_entry = tk.Entry(self.parameter_frame, textvariable=StringVar(self, value="#6ECBCE,#FF2243,#FFC33D,#CE9673"))
-        self.color_entry.place(relx=0.6, rely=0.5)
+        self.color_entry.place(relx=0.6, rely=0.3)
+
+        # get fps
+        optionListFps = [24,30,60]
+        self.dropVarFps=StringVar()
+        self.dropVarFps.set(optionListFps[0])
+        self.fps_option = tk.OptionMenu(self.parameter_frame, self.dropVarFps, *optionListFps,)
+        self.fps_option.place(relx=0.6, rely=0.5)
 
     
     # call main.py
@@ -171,7 +178,8 @@ class BCR_UI(tk.Tk):
             main.BCR_Main(file_path=self.path, image_path=self.i_path, save_location=self.location, title_name=self.title_entry.get(), 
             bar_size=self.advanced_data.get('bar_thickness'), color_palette=self.color_entry.get().split(","),
             bar_label_text_type=self.advanced_data.get('bar_label_text_type'),
-            text_after_bar_label=self.advanced_data.get('text_after_bar_label'),)
+            text_after_bar_label=self.advanced_data.get('text_after_bar_label'),
+            fps = self.dropVarFps.get())
 
     @property
     def advanced_data(self):
@@ -250,17 +258,24 @@ class BCR_UI(tk.Tk):
     def titleEntry(self):
         label_1 = tk.Label(self.parameter_frame, text="Title", bg=self.bg_color)
         label_1.place(relx=0.1, rely=0.1)
-        label_2 = tk.Label(self.parameter_frame, text="*It is the text that appears at the top of the Video as a heading\nIf it is left empty, the data file name is used.", bg=self.bg_color, fg=self.hint_color)
+        label_2 = tk.Label(self.parameter_frame, text="*Text that appears at the top of the Video as a heading.", bg=self.bg_color, fg=self.hint_color)
         label_2.place(relx=0.1, rely=0.2)
 
     # color entry
     def colorsEntry(self):
         label_1 = tk.Label(self.parameter_frame, text="Color palette", bg=self.bg_color)
-        label_1.place(relx=0.1, rely=0.5)
+        label_1.place(relx=0.1, rely=0.3)
         label_2 = tk.Label(self.parameter_frame, text="*Enter the hex code of colors separated by a comma. eg: #6ECBCE,#FF2243", bg=self.bg_color, fg=self.hint_color)
-        label_2.place(relx=0.1, rely=0.6)
+        label_2.place(relx=0.1, rely=0.4)
     
-    # button: run button
+    # get fps
+    def fpsEntry(self):
+        label_1 = tk.Label(self.parameter_frame, text="FPS", bg=self.bg_color)
+        label_1.place(relx=0.1, rely=0.5)
+        label_2 = tk.Label(self.parameter_frame, text="*The type of text for the bar label", bg=self.bg_color, fg=self.hint_color)
+        label_2.place(relx=0.1, rely=0.6)
+
+    # button: advance options
     def advancedButton(self):
         btn = tk.Button(self.advanced_frame, text="Select Advanced Options", command=self.popup, bg=self.btn_color)
         # btn = tk.Button(self, text="Create Video", command=self.createVideo, highlightbackground=self.btn_color)   # for mac
@@ -274,7 +289,7 @@ class BCR_UI(tk.Tk):
     def runButton(self):
         btn = tk.Button(self.run_frame, text="Create Video", command=self.createVideo, bg=self.btn_color)
         # btn = tk.Button(self, text="Create Video", command=self.createVideo, highlightbackground=self.btn_color)   # for mac
-        btn.place(relx=0.4, rely=0.2)
+        btn.place(relx=0.4, rely=0.3)
 
     def execution(self):
 
@@ -292,6 +307,7 @@ class BCR_UI(tk.Tk):
         self.titleEntry()
         self.colorsEntry()
         self.advancedButton()
+        self.fpsEntry()
         self.runButton()
         self.mainloop()
 

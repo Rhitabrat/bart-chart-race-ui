@@ -5,7 +5,7 @@ import ntpath
 class BCR_Main:
         
     def __init__(self, file_path, image_path, save_location, title_name, 
-                bar_size, color_palette, text_after_bar_label, bar_label_text_type):
+                bar_size, color_palette, text_after_bar_label, bar_label_text_type, fps):
         
         self.path = file_path
         self.i_path = image_path
@@ -15,6 +15,7 @@ class BCR_Main:
         self.color_palette = color_palette
         self.text_after_bar_label = text_after_bar_label
         self.bar_label_text_type = bar_label_text_type
+        self.fps = fps
 
         df = pd.read_csv(self.path, index_col='Date')
 
@@ -69,6 +70,8 @@ class BCR_Main:
             fixed_order=False,
             fixed_max=False,
             steps_per_period=45, # smoothness
+            period_length=1500,     # time period in ms per data
+            fps=self.fps,
             interpolate_period=False,
             # label_bars=True,
             bar_size=self.bar_size,
@@ -87,7 +90,6 @@ class BCR_Main:
                             'weight': 'medium', 'color': '#25265E'},
 
             perpendicular_bar_func=None,
-            period_length=1500,     # time period in ms per data
             # figsize=(26.24, 15),    # resolution (4k -> (26.24,15))
             # dpi=144,
             # cmap='brand_colors',
@@ -102,7 +104,7 @@ class BCR_Main:
             filter_column_colors=True,
 
             # change
-            fig_kwargs={'figsize':(26.67, 15), 'dpi':144, 'facecolor': '#F8FAFF'} ,
+            fig_kwargs={'figsize':(13.5, 8), 'dpi':144, 'facecolor': '#F8FAFF'} ,
             # colors='brand_colors',
             colors=self.color_palette,
             title={'label': self.title_name,
