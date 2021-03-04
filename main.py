@@ -104,7 +104,7 @@ class BCR_Main:
             filter_column_colors=True,
 
             # change
-            fig_kwargs={'figsize':(13.5, 8), 'dpi':144, 'facecolor': '#F8FAFF'} ,
+            fig_kwargs={'figsize':(26.67, 15), 'dpi':144, 'facecolor': '#F8FAFF'} ,
             # colors='brand_colors',
             colors=self.color_palette,
             title={'label': self.title_name,

@@ -5,6 +5,10 @@ import time
 from tkinter import filedialog
 import main
 import ntpath
+from tkinter.ttk import Progressbar
+import time
+import threading
+from tkinter import HORIZONTAL
 # from PIL import ImageTk, Image
 
 class Splash(tk.Toplevel):
@@ -108,7 +112,6 @@ class PopupWindow(tk.Tk):
         self.withdraw()
 
 
-
 class BCR_UI(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -168,18 +171,38 @@ class BCR_UI(tk.Tk):
         self.fps_option = tk.OptionMenu(self.parameter_frame, self.dropVarFps, *optionListFps,)
         self.fps_option.place(relx=0.6, rely=0.5)
 
+        self.progress = Progressbar(self.run_frame, orient=HORIZONTAL,length=200,  mode='determinate')
+        self.progress.place(relx=0.6, rely=0.3)
     
     # call main.py
     def createVideo(self):
-        # check if data is uploaded
-        if self.d_flag == False:
-            messagebox.showwarning("showwarning", "Data is not uploaded")
-        else:
-            main.BCR_Main(file_path=self.path, image_path=self.i_path, save_location=self.location, title_name=self.title_entry.get(), 
-            bar_size=self.advanced_data.get('bar_thickness'), color_palette=self.color_entry.get().split(","),
-            bar_label_text_type=self.advanced_data.get('bar_label_text_type'),
-            text_after_bar_label=self.advanced_data.get('text_after_bar_label'),
-            fps = self.dropVarFps.get())
+        def creation():
+            # check if data is uploaded
+            if self.d_flag == False:
+                messagebox.showwarning("showwarning", "Data is not uploaded")
+            else:
+
+                main.BCR_Main(file_path=self.path, image_path=self.i_path, save_location=self.location, title_name=self.title_entry.get(), 
+                bar_size=self.advanced_data.get('bar_thickness'), color_palette=self.color_entry.get().split(","),
+                bar_label_text_type=self.advanced_data.get('bar_label_text_type'),
+                text_after_bar_label=self.advanced_data.get('text_after_bar_label'),
+                fps = self.dropVarFps.get())
+
+        def progress_bar():
+            self.progress['value'] = 20
+            time.sleep(5)
+            # self.progress.stop()
+            
+        
+        t1 = threading.Thread(target=progress_bar)
+        t1.start()
+        # time.sleep(1)
+        t2 = threading.Thread(target=creation)
+        t2.start()
+
+        # t1.join()
+        # if not t2.isAlive():
+        self.progress['value'] = 100
 
     @property
     def advanced_data(self):
@@ -289,7 +312,7 @@ class BCR_UI(tk.Tk):
     def runButton(self):
         btn = tk.Button(self.run_frame, text="Create Video", command=self.createVideo, bg=self.btn_color)
         # btn = tk.Button(self, text="Create Video", command=self.createVideo, highlightbackground=self.btn_color)   # for mac
-        btn.place(relx=0.4, rely=0.3)
+        btn.place(relx=0.4, rely=0.2)
 
     def execution(self):
 
