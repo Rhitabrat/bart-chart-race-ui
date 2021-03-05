@@ -398,7 +398,7 @@ pip-selfcheck.json
 test.py
 test.html
 screenshots/
-video.mp4
+*.mp4
 fonts/
 data/
 bar_image_labels/
