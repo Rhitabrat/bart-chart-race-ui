@@ -23,7 +23,7 @@ class Splash(tk.Toplevel):
         # panel.pack()
         
         self.geometry("300x300")
-        label = tk.Label(self, text="Programiz", bg="#CDDDFD")
+        label = tk.Label(self, text="Bar Chart Race", bg="#CDDDFD")
         label.place(relx=0.5, rely=0.5, anchor=CENTER)
 
         self.overrideredirect(True)
@@ -196,17 +196,12 @@ class BCR_UI(tk.Tk):
             self.progress.start(interval=300)
             # self.progress['value'] = 20
             time.sleep(5)
-            # self.progress.stop()
             
         
         t1 = threading.Thread(target=progress_bar)
         t1.start()
-        # time.sleep(1)
         t2 = threading.Thread(target=creation)
         t2.start()
-
-        # t1.join()
-        # if not t2.isAlive():
         
 
     @property
