@@ -170,9 +170,6 @@ class BCR_UI(tk.Tk):
         self.dropVarFps.set(optionListFps[0])
         self.fps_option = tk.OptionMenu(self.parameter_frame, self.dropVarFps, *optionListFps,)
         self.fps_option.place(relx=0.6, rely=0.5)
-
-        # self.progress = Progressbar(self.run_frame, orient=HORIZONTAL,length=200,  mode='determinate')
-        # self.progress.place(relx=0.6, rely=0.3)
     
     # call main.py
     def createVideo(self):
@@ -188,14 +185,16 @@ class BCR_UI(tk.Tk):
                 text_after_bar_label=self.advanced_data.get('text_after_bar_label'),
                 fps = self.dropVarFps.get())
 
-            self.progress['value'] = 100
+            # self.progress['value'] = 100
+
+            messagebox.showinfo("showinfo","Done")
             self.progress.destroy()
 
         def progress_bar():
-            self.progress = Progressbar(self.run_frame, orient=HORIZONTAL,length=200,  mode='determinate')
+            self.progress = Progressbar(self.run_frame, orient=HORIZONTAL,length=200,  mode='indeterminate')
             self.progress.place(relx=0.6, rely=0.3)
-
-            self.progress['value'] = 20
+            self.progress.start(interval=300)
+            # self.progress['value'] = 20
             time.sleep(5)
             # self.progress.stop()
             
