@@ -12,14 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout Repo
+      uses: actions/checkout@v2
 
-    - name: Package Application
-      uses: JackMcKew/pyinstaller-action-windows@main
-      # with:
-      #   path: src
+    - name: Install Pyinstaller
+      run: pip install pyinstaller
+    
+    - name: Run Pyinstaller
+      run: pyinstaller load_ui.py --onefile --windowed --hidden-import cmath
 
-    - uses: actions/upload-artifact@v2
+    - name: Release App
+      uses: ncipollo/release-action@v1
       with:
-        name: name-of-artifact
-        path: dist/windows
+        artifacts: "dist/*"
