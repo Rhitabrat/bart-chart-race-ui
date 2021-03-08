@@ -405,5 +405,3 @@ bar_image_labels/
 dir
 build/
 dist/
-load_ui.spec
-test.spec
