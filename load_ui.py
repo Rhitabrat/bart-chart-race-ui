@@ -194,7 +194,6 @@ class BCR_UI(tk.Tk):
                 else:
                     subprocess.Popen(["open", self.location])
 
-            # messagebox.showinfo("showinfo","Done")
             self.progress.destroy()
 
         def progress_bar():
