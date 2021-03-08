@@ -17,11 +17,11 @@ jobs:
     - name: Update apt
       run: sudo apt-get update
 
-    - name: Upgrade apt
-      run: sudo apt-get upgrade
+    # - name: Upgrade apt
+    #   run: sudo apt-get upgrade
 
     - name: Install Git
-      run: sudo apt install git-all
+      run: sudo apt install git
 
     - name: Package Application
       uses: JackMcKew/pyinstaller-action-windows@main
