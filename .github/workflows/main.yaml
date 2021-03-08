@@ -14,14 +14,19 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v2
 
-    - name: Install Pyinstaller
-      run: pip3 install pyinstaller
+    name: Package Application
+    uses: JackMcKew/pyinstaller-action-windows@main
+    with:
+      path: src
+      
+    # - name: Install Pyinstaller
+    #   run: pip3 install pyinstaller
     
-    - name: Run Pyinstaller
-      run: python3 -m PyInstaller load_ui.py --onefile --windowed --hidden-import cmath
+    # - name: Run Pyinstaller
+    #   run: python3 -m PyInstaller load_ui.py --onefile --windowed --hidden-import cmath
 
     - name: Release App
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "dist/*"
+        artifacts: "src/dist/windows/*"
         token: ${{ secrets.BARCHARTRACE_TOKEN }}
