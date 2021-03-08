@@ -23,5 +23,5 @@ jobs:
     - name: Release App
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "dist/"
+        artifacts: "dist/*"
         token: ${{ secrets.BARCHARTRACE_TOKEN }}
