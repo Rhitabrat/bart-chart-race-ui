@@ -11,14 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
     - name: Package Application
       uses: JackMcKew/pyinstaller-action-windows@main
       with:
         path: src
-      
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: name-of-artifact
+        path: src/dist/windows
     # - name: Install Pyinstaller
     #   run: pip3 install pyinstaller
     
