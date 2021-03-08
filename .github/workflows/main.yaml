@@ -19,7 +19,7 @@ jobs:
       run: pip3 install pyinstaller
     
     - name: Run Pyinstaller
-      run: python3 -m pyinstaller load_ui.py --onefile --windowed --hidden-import cmath
+      run: python3 -m PyInstaller load_ui.py --onefile --windowed --hidden-import cmath
 
     - name: Release App
       uses: ncipollo/release-action@v1
