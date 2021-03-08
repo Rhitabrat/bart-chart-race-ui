@@ -22,6 +22,7 @@ jobs:
       run: python3 -m PyInstaller load_ui.py --onefile --windowed --hidden-import cmath
 
     - name: Release App
-      uses: ncipollo/release-action@v1
+      uses: actions/upload-artifact@v2
       with:
-        artifacts: "dist/*"
+        name: app
+        path: "dist/"
