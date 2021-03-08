@@ -9,7 +9,8 @@ from tkinter.ttk import Progressbar
 import time
 import threading
 from tkinter import HORIZONTAL
-# from PIL import ImageTk, Image
+import subprocess
+import os
 
 class Splash(tk.Toplevel):
     def __init__(self, parent):
@@ -186,8 +187,14 @@ class BCR_UI(tk.Tk):
                 fps = self.dropVarFps.get())
 
             # self.progress['value'] = 100
+            msg = messagebox.askquestion("Done", "Video created!!! Do you want to open the video location?",icon='info')
+            if msg=='yes':
+                if self.s_flag == False:
+                    subprocess.Popen(["open", os.path.abspath(os.getcwd())])
+                else:
+                    subprocess.Popen(["open", self.location])
 
-            messagebox.showinfo("showinfo","Done")
+            # messagebox.showinfo("showinfo","Done")
             self.progress.destroy()
 
         def progress_bar():
@@ -295,7 +302,7 @@ class BCR_UI(tk.Tk):
     def fpsEntry(self):
         label_1 = tk.Label(self.parameter_frame, text="FPS", bg=self.bg_color)
         label_1.place(relx=0.1, rely=0.5)
-        label_2 = tk.Label(self.parameter_frame, text="*The type of text for the bar label", bg=self.bg_color, fg=self.hint_color)
+        label_2 = tk.Label(self.parameter_frame, text="*Fps of the video. Default is 30", bg=self.bg_color, fg=self.hint_color)
         label_2.place(relx=0.1, rely=0.6)
 
     # button: advance options

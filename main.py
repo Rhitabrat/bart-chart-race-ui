@@ -62,7 +62,7 @@ class BCR_Main:
 
         # plotting the graph
         bcr.bar_chart_race(
-            df=df.head(5),
+            df=df.head(2),
             filename=self.location,
             orientation='h',
             sort='desc',
