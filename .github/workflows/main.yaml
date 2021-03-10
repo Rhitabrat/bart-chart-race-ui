@@ -2,8 +2,9 @@ name: Package Application with Pyinstaller
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -11,17 +12,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-    - name: Install Pyinstaller
-      run: pip3 install pyinstaller
-    
-    - name: Run Pyinstaller
-      run: python3 -m PyInstaller load_ui.py --onefile --windowed --hidden-import cmath
-
-    - name: Release App
-      uses: ncipollo/release-action@v1
+    - name: Package Application
+      uses: JackMcKew/pyinstaller-action-windows@main
       with:
-        artifacts: "dist/*"
-        token: ${{ secrets.BARCHARTRACE_TOKEN }}
+        path: .
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Release
+        path: dist
+
+
+# name: Package Application with Pyinstaller
+
+# on:
+#   push:
+#     tags:
+#       - 'v*'
+
+# jobs:
+#   build:
+
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout Repo
+#       uses: actions/checkout@v2
+
+#     - name: Install Pyinstaller
+#       run: pip3 install pyinstaller
+    
+#     - name: Run Pyinstaller
+#       run: python3 -m PyInstaller load_ui.py --onefile --windowed --hidden-import cmath
+
+#     - name: Release App
+#       uses: ncipollo/release-action@v1
+#       with:
+#         artifacts: "dist/*"
+#         token: ${{ secrets.BARCHARTRACE_TOKEN }}
